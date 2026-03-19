@@ -261,6 +261,120 @@ const ChochChart = () => (
   </svg>
 );
 
+const BosChart = () => (
+  <svg viewBox="0 0 300 160" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
+    <polyline points="10,130 30,100 50,115 70,80 90,95 110,60 130,75 150,40" fill="none" stroke="hsl(var(--bull))" strokeWidth="2" strokeLinejoin="round" />
+    {[[30,100],[70,80],[110,60]].map(([x,y],i) => (
+      <g key={i}><circle cx={x} cy={y} r="3" fill="hsl(var(--bull))" opacity="0.7" /><text x={x-6} y={y+13} fill="hsl(var(--bull))" fontSize="7" fontFamily="monospace">HL</text></g>
+    ))}
+    {[[50,115],[90,95],[130,75]].map(([x,y],i) => (
+      <g key={i}><circle cx={x} cy={y} r="3" fill="hsl(var(--bull))" opacity="0.4" /><text x={x-6} y={y-7} fill="hsl(var(--bull))" fontSize="7" fontFamily="monospace">HH</text></g>
+    ))}
+    <line x1="110" y1="60" x2="280" y2="60" stroke="hsl(var(--primary))" strokeWidth="1" strokeDasharray="4 3" />
+    <text x="220" y="55" fill="hsl(var(--primary))" fontSize="8" fontFamily="monospace">PREV HH</text>
+    <polyline points="150,40 165,55 175,48 190,30" fill="none" stroke="hsl(var(--bull))" strokeWidth="2.5" strokeLinejoin="round" />
+    <rect x="175" y="22" width="30" height="14" rx="3" fill="hsl(var(--bull) / 0.2)" />
+    <text x="178" y="32" fill="hsl(var(--bull))" fontSize="8" fontFamily="monospace" fontWeight="bold">BOS ↑</text>
+    <polyline points="190,30 210,20 235,15 260,10" fill="none" stroke="hsl(var(--bull))" strokeWidth="2.5" strokeLinejoin="round" />
+    <text x="8" y="155" fill="hsl(var(--bull))" fontSize="8" fontFamily="monospace">UPTREND CONTINUES</text>
+  </svg>
+);
+
+const FairValueGapChart = () => (
+  <svg viewBox="0 0 300 160" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
+    {/* Candle 1 */}
+    <line x1="60" y1="100" x2="60" y2="130" stroke="hsl(var(--bull))" strokeWidth="1.5" />
+    <rect x="53" y="105" width="14" height="20" rx="1" fill="hsl(var(--bull) / 0.3)" stroke="hsl(var(--bull))" strokeWidth="1.5" />
+    {/* Candle 2 - big impulse */}
+    <line x1="100" y1="40" x2="100" y2="100" stroke="hsl(var(--bull))" strokeWidth="1.5" />
+    <rect x="93" y="45" width="14" height="50" rx="1" fill="hsl(var(--bull) / 0.4)" stroke="hsl(var(--bull))" strokeWidth="1.5" />
+    {/* Candle 3 */}
+    <line x1="140" y1="30" x2="140" y2="70" stroke="hsl(var(--bull))" strokeWidth="1.5" />
+    <rect x="133" y="35" width="14" height="25" rx="1" fill="hsl(var(--bull) / 0.3)" stroke="hsl(var(--bull))" strokeWidth="1.5" />
+    {/* FVG zone */}
+    <rect x="65" y="70" width="70" height="35" fill="hsl(var(--primary) / 0.15)" stroke="hsl(var(--primary))" strokeWidth="1" strokeDasharray="4 2" rx="2" />
+    <text x="72" y="92" fill="hsl(var(--primary))" fontSize="9" fontFamily="monospace" fontWeight="bold">FVG</text>
+    {/* Lines showing gap */}
+    <line x1="67" y1="70" x2="130" y2="70" stroke="hsl(var(--primary))" strokeWidth="1" strokeDasharray="2 2" />
+    <text x="132" y="68" fill="hsl(var(--muted-foreground))" fontSize="7" fontFamily="monospace">C3 LOW</text>
+    <line x1="67" y1="105" x2="130" y2="105" stroke="hsl(var(--primary))" strokeWidth="1" strokeDasharray="2 2" />
+    <text x="132" y="108" fill="hsl(var(--muted-foreground))" fontSize="7" fontFamily="monospace">C1 HIGH</text>
+    {/* Price returns to fill */}
+    <polyline points="150,35 170,28 190,40 210,65 220,80" fill="none" stroke="hsl(var(--bear))" strokeWidth="1.5" strokeLinejoin="round" strokeDasharray="4 2" />
+    <circle cx="220" cy="80" r="4" fill="none" stroke="hsl(var(--bull))" strokeWidth="2" />
+    <text x="226" y="84" fill="hsl(var(--bull))" fontSize="8" fontFamily="monospace">FILL & GO ↑</text>
+    <polyline points="220,80 240,65 260,50 280,35" fill="none" stroke="hsl(var(--bull))" strokeWidth="2.5" strokeLinejoin="round" />
+  </svg>
+);
+
+const EqualHighsLowsChart = () => (
+  <svg viewBox="0 0 300 160" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
+    {/* Equal highs */}
+    <line x1="20" y1="35" x2="200" y2="35" stroke="hsl(var(--bear))" strokeWidth="1.5" strokeDasharray="5 3" />
+    <text x="8" y="28" fill="hsl(var(--bear))" fontSize="8" fontFamily="monospace">EQUAL HIGHS (EQH) — LIQUIDITY</text>
+    {/* Price touching equal highs */}
+    <polyline points="15,100 40,60 55,80 80,38 100,75 125,40 145,85 170,36" fill="none" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinejoin="round" />
+    {[80,125,170].map(x => <circle key={x} cx={x} cy={37} r="3.5" fill="hsl(var(--bear))" />)}
+    {/* Sweep and reversal */}
+    <polyline points="170,36 185,22 195,55" fill="none" stroke="hsl(var(--bear))" strokeWidth="2" strokeLinejoin="round" />
+    <circle cx="185" cy="22" r="4" fill="none" stroke="hsl(var(--bear))" strokeWidth="1.5" />
+    <text x="195" y="20" fill="hsl(var(--bear))" fontSize="8" fontFamily="monospace">SWEEP ↑</text>
+    <polyline points="195,55 215,80 235,100 260,120 280,135" fill="none" stroke="hsl(var(--bear))" strokeWidth="2.5" strokeLinejoin="round" />
+    <text x="220" y="145" fill="hsl(var(--bear))" fontSize="8" fontFamily="monospace">REVERSAL ↓</text>
+    {/* Equal lows label */}
+    <text x="8" y="155" fill="hsl(var(--muted-foreground))" fontSize="7" fontFamily="monospace">SAME CONCEPT APPLIES TO EQUAL LOWS (EQL)</text>
+  </svg>
+);
+
+const InducementChart = () => (
+  <svg viewBox="0 0 300 160" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
+    {/* Main trend down */}
+    <polyline points="10,30 40,55 55,45 75,80 90,70 115,100" fill="none" stroke="hsl(var(--bear))" strokeWidth="2" strokeLinejoin="round" />
+    {/* Minor swing low that induces */}
+    <line x1="75" y1="80" x2="200" y2="80" stroke="hsl(var(--muted-foreground))" strokeWidth="1" strokeDasharray="3 3" />
+    <text x="130" y="76" fill="hsl(var(--muted-foreground))" fontSize="7" fontFamily="monospace">MINOR LOW</text>
+    {/* Inducement move - breaks minor low */}
+    <polyline points="115,100 130,85 140,92 155,75 162,82" fill="none" stroke="hsl(var(--bull))" strokeWidth="1.5" strokeLinejoin="round" strokeDasharray="3 2" />
+    <text x="125" y="68" fill="hsl(var(--primary))" fontSize="8" fontFamily="monospace">INDUCEMENT</text>
+    {/* Traders enter long */}
+    <rect x="148" y="62" width="24" height="12" rx="2" fill="hsl(var(--bull) / 0.15)" />
+    <text x="151" y="71" fill="hsl(var(--bull))" fontSize="7" fontFamily="monospace">BUY</text>
+    {/* Trap and collapse */}
+    <polyline points="162,82 175,95 190,110 210,130 240,140 270,145" fill="none" stroke="hsl(var(--bear))" strokeWidth="2.5" strokeLinejoin="round" />
+    <text x="200" y="155" fill="hsl(var(--bear))" fontSize="8" fontFamily="monospace">TRAPPED BUYERS ↓</text>
+    {/* Stop loss cluster */}
+    <rect x="90" y="98" width="30" height="10" rx="2" fill="hsl(var(--bear) / 0.1)" />
+    <text x="93" y="106" fill="hsl(var(--bear))" fontSize="6" fontFamily="monospace">SL HUNT</text>
+  </svg>
+);
+
+const MarketStructureShiftChart = () => (
+  <svg viewBox="0 0 300 160" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
+    {/* Bearish structure */}
+    <polyline points="10,25 30,45 45,35 65,65 80,50 100,85 115,70 135,105" fill="none" stroke="hsl(var(--bear))" strokeWidth="2" strokeLinejoin="round" />
+    {[[30,45],[65,65],[100,85]].map(([x,y],i) => (
+      <g key={i}><circle cx={x} cy={y} r="2.5" fill="hsl(var(--bear))" /><text x={x-5} y={y+12} fill="hsl(var(--bear))" fontSize="6" fontFamily="monospace">LH</text></g>
+    ))}
+    {[[45,35],[80,50],[115,70]].map(([x,y],i) => (
+      <g key={i}><circle cx={x} cy={y} r="2.5" fill="hsl(var(--bear))" opacity="0.5" /><text x={x-4} y={y-6} fill="hsl(var(--bear))" fontSize="6" fontFamily="monospace">LL</text></g>
+    ))}
+    {/* MSS candle */}
+    <rect x="132" y="68" width="14" height="40" rx="1" fill="hsl(var(--bull) / 0.4)" stroke="hsl(var(--bull))" strokeWidth="1.5" />
+    <line x1="139" y1="60" x2="139" y2="68" stroke="hsl(var(--bull))" strokeWidth="1.5" />
+    {/* MSS label */}
+    <rect x="148" y="72" width="28" height="12" rx="3" fill="hsl(var(--primary) / 0.25)" />
+    <text x="151" y="81" fill="hsl(var(--primary))" fontSize="7" fontFamily="monospace" fontWeight="bold">MSS</text>
+    {/* LH line break */}
+    <line x1="100" y1="85" x2="180" y2="85" stroke="hsl(var(--primary))" strokeWidth="1" strokeDasharray="3 2" />
+    <text x="150" y="95" fill="hsl(var(--primary))" fontSize="7" fontFamily="monospace">LH BROKEN</text>
+    {/* New bullish structure */}
+    <polyline points="145,68 165,55 175,62 195,42 210,50 230,30 250,38 270,18" fill="none" stroke="hsl(var(--bull))" strokeWidth="2.5" strokeLinejoin="round" />
+    <text x="8" y="155" fill="hsl(var(--bear))" fontSize="8" fontFamily="monospace">BEARISH</text>
+    <line x1="137" y1="140" x2="137" y2="155" stroke="hsl(var(--border))" strokeWidth="1" />
+    <text x="195" y="155" fill="hsl(var(--bull))" fontSize="8" fontFamily="monospace">BULLISH (MSS CONFIRMED)</text>
+  </svg>
+);
+
 // ── Data ──────────────────────────────────────────────────────────────────────
 
 const concepts = [
@@ -403,6 +517,76 @@ const concepts = [
     ],
     hinglish: "Jab downtrend mein price pehli baar ek lower high ke upar jaata hai — yeh CHoCH hai. Matlab structure badal raha hai. Abhi sirf signal hai, confirmation nahi.",
     Chart: ChochChart,
+  },
+  {
+    title: "Break of Structure (BOS)",
+    tag: "Structure",
+    tagColor: "bull",
+    description: "BOS confirms the continuation of a trend. In an uptrend, it occurs when price breaks above the previous higher high, confirming buyers are still in control.",
+    points: [
+      "In uptrend: price breaks above the last higher high — BOS confirmed",
+      "In downtrend: price breaks below the last lower low — BOS confirmed",
+      "BOS confirms existing trend direction, unlike CHoCH which signals reversal",
+      "Multiple BOS in a row = strong trending market",
+    ],
+    hinglish: "Jab price uptrend mein pichle high ke upar jaata hai — yeh BOS hai. Matlab trend abhi bhi strong hai aur continue hoga.",
+    Chart: BosChart,
+  },
+  {
+    title: "Fair Value Gap (FVG)",
+    tag: "Imbalance",
+    tagColor: "primary",
+    description: "An FVG is created when a strong impulse candle leaves a gap between the wicks of the candles before and after it. Price tends to return to fill this gap.",
+    points: [
+      "FVG = gap between Candle 1's high and Candle 3's low (in bullish case)",
+      "Created by aggressive buying/selling leaving an imbalance",
+      "Price often returns to the FVG zone before continuing the move",
+      "FVGs on higher timeframes (Daily, 4H) are more significant",
+    ],
+    hinglish: "Jab ek bahut strong candle banti hai, toh uske aas-paas ek gap chhut jaata hai. Price wapas aake iss gap ko fill karta hai — phir aage jaata hai.",
+    Chart: FairValueGapChart,
+  },
+  {
+    title: "Equal Highs / Equal Lows",
+    tag: "Liquidity",
+    tagColor: "bear",
+    description: "When price creates two or more highs (or lows) at the same level, it builds a cluster of stop losses above (or below). Smart money targets these levels for liquidity.",
+    points: [
+      "Equal highs = stop losses stacked above — sell-side liquidity",
+      "Equal lows = stop losses stacked below — buy-side liquidity",
+      "Price sweeps these levels to grab liquidity before reversing",
+      "Never place stop losses at obvious equal levels — you'll get hunted",
+    ],
+    hinglish: "Jab price 2-3 baar same high banata hai — wahan bahut saare stop losses hote hain. Smart money price ko wahan le jaake sweep karta hai, phir palat deta hai.",
+    Chart: EqualHighsLowsChart,
+  },
+  {
+    title: "Inducement",
+    tag: "Trap",
+    tagColor: "bear",
+    description: "Inducement is a deliberate move to lure retail traders into taking a trade before the real move happens. It targets minor structure points to trigger entries and then traps them.",
+    points: [
+      "Price breaks a minor swing high/low — retail traders enter",
+      "The move is a trap — price quickly reverses against them",
+      "Inducement creates liquidity that institutions use to fill orders",
+      "Look for inducement near key levels before the real move",
+    ],
+    hinglish: "Market ek chota sa move karta hai jisse lagta hai breakout ho raha hai — log entry lete hain. Phir market palat jaata hai aur unko trap kar deta hai. Yeh inducement hai.",
+    Chart: InducementChart,
+  },
+  {
+    title: "Market Structure Shift (MSS)",
+    tag: "Advanced",
+    tagColor: "primary",
+    description: "MSS is similar to CHoCH but happens with a single strong impulse candle that breaks structure. It's a more aggressive and decisive shift in market direction.",
+    points: [
+      "MSS = aggressive single-candle break of the last structural point",
+      "Stronger signal than a gradual CHoCH — shows conviction",
+      "Often accompanied by high volume and a large-bodied candle",
+      "Best when combined with a liquidity sweep before the shift",
+    ],
+    hinglish: "Jab ek powerful candle akele mein poora structure tod deti hai — yeh MSS hai. CHoCH dheere hota hai, MSS ek shot mein. Bahut strong signal hai reversal ka.",
+    Chart: MarketStructureShiftChart,
   },
 ];
 
